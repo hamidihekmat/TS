@@ -12,4 +12,8 @@ const apple: Product = {
   price: 2.99,
 };
 
-console.log(apple.name);
+const button = document.querySelector('button');
+
+button?.addEventListener('click', () => {
+  console.log('Clicked');
+});

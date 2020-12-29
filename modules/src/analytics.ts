@@ -1,5 +1,4 @@
 console.log('starting...');
-
-export const printText = () => {
+const printText = () => {
   console.log('printing...');
 };
