@@ -1,3 +1,4 @@
+"use strict";
 // Its better to use unknow instead of any => and do manually type checking to assign value to any
 var userInput;
 var userName;
@@ -11,7 +12,6 @@ if (typeof userInput === 'string') {
 function generateError(message, code) {
     throw {
         message: message,
-        code: code
+        code: code,
     };
 }
-generateError('An error occured', 500);
