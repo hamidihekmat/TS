@@ -1,21 +1,15 @@
-function combine(input1, input2, resultConversion) {
-    var result;
-    if (typeof input1 === 'number' && typeof input2 === 'number') {
-        result = input1 + input2;
-    }
-    else {
-        result = input1.toString() + input2.toString();
-    }
-    if (resultConversion === 'as-number') {
-        return +result;
-    }
-    else {
-        return result.toString();
-    }
+// Return type is the return of the function
+function add(n1, n2) {
+    return n1 + n2;
 }
-var combinedAges = combine(10, 120, 'as-number');
-console.log(combinedAges);
-var combinedNames = combine('Alex', 'Jones', 'as-text');
-console.log(combinedNames);
-var combinedStringAges = combine('30', '26', 'as-number');
-console.log(combinedStringAges);
+// Another way of writing a function but declaring the return type
+function multiply(n1, n2) {
+    return (n1 * n2).toString();
+}
+function addAndHandle(n1, n2, cb) {
+    var result = n1 + n2;
+    cb(result);
+}
+addAndHandle(10, 20, function (result) {
+    console.log(result);
+});
