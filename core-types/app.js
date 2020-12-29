@@ -1,15 +1,17 @@
-// Return type is the return of the function
-function add(n1, n2) {
-    return n1 + n2;
+// Its better to use unknow instead of any => and do manually type checking to assign value to any
+var userInput;
+var userName;
+userInput = 5;
+userInput = 'Max';
+// Check the type of unknow then assign it to variable
+if (typeof userInput === 'string') {
+    userName = userInput;
 }
-// Another way of writing a function but declaring the return type
-function multiply(n1, n2) {
-    return (n1 * n2).toString();
+// Never type
+function generateError(message, code) {
+    throw {
+        message: message,
+        code: code
+    };
 }
-function addAndHandle(n1, n2, cb) {
-    var result = n1 + n2;
-    cb(result);
-}
-addAndHandle(10, 20, function (result) {
-    console.log(result);
-});
+generateError('An error occured', 500);

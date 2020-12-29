@@ -9,3 +9,11 @@ userInput = 'Max';
 if (typeof userInput === 'string') {
   userName = userInput;
 }
+
+// Never type
+function generateError(message: string, code: number) {
+  throw {
+    message,
+    code,
+  };
+}
