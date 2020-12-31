@@ -61,7 +61,7 @@ function extractAndConvert<T extends object, U extends keyof T>(
   return 'Value: ' + obj[key];
 }
 
-// Generic Classes => allows only primitive types
+// Generic Classes => allows only primitive types to only be used ONCE
 class GenericStorage<T extends string | number | boolean> {
   private data: T[] = [];
   addItem(item: T) {
@@ -85,3 +85,24 @@ const numberStorage = new GenericStorage<number>();
 numberStorage.addItem(23);
 numberStorage.addItem(22);
 numberStorage.removeItem(22);
+
+interface CourseGoal {
+  title: string;
+  desciption: string;
+  completeUntil: Date;
+}
+
+// Utility Types (Partial - Readonly)
+
+// Partially append without justifiying type
+function createCourseGoal(title: string, description: string, date: Date) {
+  let courseGoal: Partial<CourseGoal> = {};
+  courseGoal.title = title;
+  (courseGoal.desciption = description), (courseGoal.completeUntil = date);
+  return courseGoal as CourseGoal;
+}
+
+// Readonly type
+const people: Readonly<string[]> = ['Max', 'Anna'];
+
+// Generic types lock in a type vs Union type allows type combination
