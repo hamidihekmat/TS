@@ -60,3 +60,28 @@ function extractAndConvert<T extends object, U extends keyof T>(
 ) {
   return 'Value: ' + obj[key];
 }
+
+// Generic Classes => allows only primitive types
+class GenericStorage<T extends string | number | boolean> {
+  private data: T[] = [];
+  addItem(item: T) {
+    this.data.push(item);
+  }
+  removeItem(item: T) {
+    this.data.splice(this.data.indexOf(item), 1);
+  }
+  getItem() {
+    return [...this.data];
+  }
+}
+
+// String storage
+const textStorage = new GenericStorage<string>();
+textStorage.addItem('Max');
+textStorage.addItem('Manu');
+textStorage.removeItem('Max');
+// Number storage
+const numberStorage = new GenericStorage<number>();
+numberStorage.addItem(23);
+numberStorage.addItem(22);
+numberStorage.removeItem(22);
