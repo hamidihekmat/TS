@@ -1,19 +1,36 @@
-interface Product {
-  id: string;
+type Person = {
   name: string;
-  desc: string;
+  age: number;
+};
+
+type Product = {
+  name: string;
   price: number;
-}
+};
+const names: Array<Person | Product> = [];
+
+const alexandre: Person = {
+  name: 'Alex',
+  age: 23,
+};
+
+names.push(alexandre);
 
 const apple: Product = {
-  id: 'aetaodfpqe',
-  name: 'apple',
-  desc: 'Green Apple',
+  name: 'Apple',
   price: 2.99,
 };
 
-const button = document.querySelector('button');
+names.push(apple);
 
-button?.addEventListener('click', () => {
-  console.log('Clicked');
+const promise = new Promise<string>((resolve, reject) => {
+  setTimeout(() => {
+    resolve('This is done!');
+  }, 2000);
+  return 'Completed';
 });
+
+// Generics
+function merge<T, U>(objA: T, objB: U) {
+  return Object.assign(objA, objB);
+}
