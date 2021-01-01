@@ -8,6 +8,71 @@ interface Validator {
   max?: number;
 }
 
+// ProjectState Management Class
+
+class StateManager {
+  private project: any[] = [];
+
+  private static instance: StateManager;
+
+  private constructor() {}
+
+  static getInstance() {
+    if (this.instance) {
+      return this.instance;
+    } else {
+      this.instance = new StateManager();
+      return this.instance;
+    }
+  }
+
+  addProject(title: string, description: string, numOfPeople: number) {
+    const newProject = {
+      id: Math.random().toString(),
+      title,
+      description,
+      numOfPeople,
+    };
+    this.project.push(newProject);
+  }
+}
+
+// Statemanagement using singleton
+const projectState = StateManager.getInstance();
+// ProjectList Class
+class ProjectList {
+  templateElement: HTMLTemplateElement;
+  hostElement: HTMLDivElement;
+  element: HTMLElement;
+  constructor(private type: 'active' | 'finished') {
+    this.templateElement = document.getElementById(
+      'project-list'
+    )! as HTMLTemplateElement;
+    this.hostElement = document.getElementById('app')! as HTMLDivElement;
+
+    const importedNode = document.importNode(
+      this.templateElement.content,
+      true
+    );
+    this.element = importedNode.firstElementChild as HTMLElement;
+    this.element.id = `${this.type}-projects`;
+    this.attach();
+    this.renderContent();
+  }
+
+  private renderContent() {
+    const listId = `${this.type}-project-list`;
+    this.element.querySelector('ul')!.id = listId;
+    this.element.querySelector('h2')!.textContent =
+      this.type.toUpperCase() + 'PROJECT';
+  }
+
+  private attach() {
+    this.hostElement.insertAdjacentElement('afterbegin', this.element);
+  }
+}
+
+// ProjectInput Class
 class ProjectInput {
   templateElement: HTMLTemplateElement;
   hostElement: HTMLDivElement;
@@ -36,7 +101,7 @@ class ProjectInput {
     this.attach();
   }
   private attach() {
-    this.hostElement.insertAdjacentElement('afterbegin', this.element);
+    this.hostElement.insertAdjacentElement('beforebegin', this.element);
   }
 
   private submitHandler = (event: Event) => {
@@ -70,3 +135,5 @@ class ProjectInput {
 }
 
 const projectInput = new ProjectInput();
+const activePrjList = new ProjectList('active');
+const finishedPrjList = new ProjectList('finished');
